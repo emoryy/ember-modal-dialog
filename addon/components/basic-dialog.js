@@ -59,20 +59,23 @@ export default Ember.Component.extend({
     }
 
     const handleClick = (event) => {
-      let $eventTarget = $(event.target);
+      const $exception = this.get('clickOutSideToCloseException');
+      const $eventTarget = $(event.target);
 
       // if the click has already resulted in the target
       // being removed or hidden, do nothing
       if (!$eventTarget.is(':visible')) {
         return;
       }
+      const closestModal = $eventTarget.closest('.ember-modal-dialog');
+      const isOurDialog = closestModal && Ember.guidFor(this) === closestModal.attr('id');
+      const notClickedOnDialog = !isOurDialog;
+      const notClickedOnException = !$exception || !$eventTarget.closest($exception).length;
 
-      // if the click is within the dialog, do nothing
-      if ($eventTarget.closest('.ember-modal-dialog').length) {
-        return;
+      // if the click is within the dialog, or was on the exception, do nothing
+      if (notClickedOnDialog && notClickedOnException) {
+        this.sendAction('onClose');
       }
-
-      this.sendAction('onClose');
     };
     const registerClick = () => $(document).on(`click.ember-modal-dialog-${guidFor(this)}`, handleClick);
 
