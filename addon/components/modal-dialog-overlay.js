@@ -16,9 +16,9 @@ export default Ember.Component.extend({
     if (!this.get('forTether')) {
       return;
     }
-    const parentNode = this.element.parentNode;
 
     const observer = new MutationObserver((mutationsList) => {
+      const parentNode = this.element.parentNode;
       for (let mutation of mutationsList) {
         if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
           const transforms = parentNode.style.transform.match(/(\d*px)/g);
@@ -28,7 +28,7 @@ export default Ember.Component.extend({
     });
 
     const config = { attributes: true };
-    observer.observe(parentNode, config);
+    observer.observe(this.element.parentNode, config);
   },
 
 });
