@@ -20,6 +20,15 @@
   {{/ember-modal-dialog-positioned-container}}
 {{else}}
   <div>
+    {{#if hasOverlay}}
+      {{ember-tether
+        click=(action 'clickedOverlay')
+        classNameBindings='overlayClassNamesString translucentOverlay:translucent overlay-class'
+        target='#viewport'
+        targetAttachment='center middle'
+        attachment='center middle'
+      }}
+    {{/if}}
     {{#ember-tether
       classNameBindings="containerClassNamesString parentIdClass container-class"
       target=target
@@ -31,13 +40,6 @@
       targetOffset=targetOffset
       constraints=constraints
     }}
-      {{#if hasOverlay}}
-        {{modal-dialog-overlay
-          classNameBindings='overlayClassNamesString translucentOverlay:translucent overlay-class'
-          action='clickedOverlay'
-          forTether=true
-        }}
-      {{/if}}
       {{yield}}
     {{/ember-tether}}
   </div>
