@@ -19,24 +19,26 @@
     {{yield}}
   {{/ember-modal-dialog-positioned-container}}
 {{else}}
-  {{#ember-tether
-    classNameBindings="containerClassNamesString parentIdClass container-class"
-    target=target
-    attachment=attachment
-    targetAttachment=targetAttachment
-    targetModifier=targetModifier
-    classPrefix=tetherClassPrefix
-    offset=offset
-    targetOffset=targetOffset
-    constraints=constraints
-  }}
-    {{#if hasOverlay}}
-      {{modal-dialog-overlay
-        classNameBindings='overlayClassNamesString translucentOverlay:translucent overlay-class'
-        action='clickedOverlay'
-        forTether=true
-      }}
-    {{/if}}
-    {{yield}}
-  {{/ember-tether}}
+  <div>
+    {{#ember-tether
+      classNameBindings="containerClassNamesString parentIdClass container-class"
+      target=target
+      attachment=attachment
+      targetAttachment=targetAttachment
+      targetModifier=targetModifier
+      classPrefix=tetherClassPrefix
+      offset=offset
+      targetOffset=targetOffset
+      constraints=constraints
+    }}
+      {{#if hasOverlay}}
+        {{modal-dialog-overlay
+          classNameBindings='overlayClassNamesString translucentOverlay:translucent overlay-class'
+          action='clickedOverlay'
+          forTether=true
+        }}
+      {{/if}}
+      {{yield}}
+    {{/ember-tether}}
+  </div>
 {{/if}}
