@@ -1,16 +1,15 @@
-{{#ember-wormhole
-  to=destinationElementId
-  renderInPlace=renderInPlace
-}}
-  {{#if hasOverlay}}
-    {{modal-dialog-overlay
-      classNameBindings='overlayClassNamesString translucentOverlay:translucent overlay-class'
-      action='clickedOverlay'
-    }}
-  {{/if}}
-{{/ember-wormhole}}
-
 {{#if renderInPlace}}
+  {{#ember-wormhole
+    to=destinationElementId
+    renderInPlace=renderInPlace
+  }}
+    {{#if hasOverlay}}
+      {{modal-dialog-overlay
+        classNameBindings='overlayClassNamesString translucentOverlay:translucent overlay-class'
+        action='clickedOverlay'
+      }}
+    {{/if}}
+  {{/ember-wormhole}}
   {{#ember-modal-dialog-positioned-container
     classNameBindings="containerClassNamesString targetAttachmentClass container-class"
     targetAttachment=targetAttachment
@@ -31,6 +30,13 @@
     targetOffset=targetOffset
     constraints=constraints
   }}
+    {{#if hasOverlay}}
+      {{modal-dialog-overlay
+        classNameBindings='overlayClassNamesString translucentOverlay:translucent overlay-class'
+        action='clickedOverlay'
+        forTether=true
+      }}
+    {{/if}}
     {{yield}}
   {{/ember-tether}}
 {{/if}}
