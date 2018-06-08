@@ -19,7 +19,7 @@
     {{yield}}
   {{/ember-modal-dialog-positioned-container}}
 {{else}}
-  <div>
+  <div class="error-workaround-div">
     {{#if hasOverlay}}
       {{ember-tether
         click=(action 'clickedOverlay')
